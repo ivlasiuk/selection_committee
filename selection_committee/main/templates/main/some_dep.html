@@ -1,0 +1,52 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'main/css/some_dep.css' %}">
+{% endblock %}
+
+{% block first_section %}
+    {% if is_404 %}
+        <p>{% trans 'Заданий факультет відсутній у базі даних.' %}</p>
+    {% else %}
+        <div class="container">
+            <div class="col-10 offset-1 ">
+                <h3 class="text-center">{{ department }}</h3>
+                <div class="row mt-4">
+                    <div class="col-auto mt-2 mb-4">
+                        <p class="dean text-left">{% trans 'Директор/Декан' %}</p>
+                        <h5>{{ department.dean }}</h5>
+                    </div>
+                </div>
+                {% if not department.text == none %}
+                <p class="text-edit">{{ department.text }}</p>
+                {% endif %}
+                <h5>{% trans 'Перелік спеціальностей:' %}</h5>
+                <table class="table table-hover table-bordered table-sortable">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">{% trans 'Код спеціальності' %}</th>
+                        <th scope="col">{% trans 'Назва спеціальності' %}</th>
+                        <th scope="col">{% trans 'Кількість місць' %}</th>
+                        <th scope="col">{% trans 'Кількість бюджетних місць' %}</th>
+                    </tr>
+                </thead>
+                {% for spec in spec %}
+                <tr class="trow">
+                    <td>{{ spec.code }}</td>
+                    <td>{{ spec.title }}</td>
+                    <td>{{ spec.amount }}</td>
+                    <td>{{ spec.budget_amount }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+        </div>
+        <div class="container mt-4">
+        </div>
+    <script src="{% static 'main/js/some_dep.js' %}"></script>
+    {% endif %}
+{% endblock %}
+
+{% block second-section %} {% endblock %}

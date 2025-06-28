@@ -1,0 +1,478 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-16 02:53+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\main\admin.py:22
+msgid "Підтвердити заявки"
+msgstr "Confirm applications"
+
+#: .\main\forms.py:30 .\main\forms.py:68
+msgid "Оберіть предмет на вибір."
+msgstr "Choose the subject of your choice."
+
+#: .\main\forms.py:36 .\main\forms.py:44 .\main\forms.py:52
+msgid "Мінімальний бал екзамену - 100."
+msgstr "The minimum exam score is 100."
+
+#: .\main\forms.py:38 .\main\forms.py:46 .\main\forms.py:54
+msgid "Максимальний бал екзамену - 200."
+msgstr "The maximum exam score is 200."
+
+#: .\main\forms.py:60
+msgid "Середній бал атестату не може бути менше за 1."
+msgstr "The average score of the certificate cannot be less than 1."
+
+#: .\main\forms.py:62
+msgid "Середній бал атестату не може бути більший за 12."
+msgstr "The average score of the certificate cannot be higher than 12."
+
+#: .\main\forms.py:67 .\main\templates\main\spec.html:98
+msgid "Оберіть..."
+msgstr "Choose..."
+
+#: .\main\forms.py:74
+msgid "Ваші паролі не співпадають."
+msgstr "Your passwords do not match."
+
+#: .\main\forms.py:81
+msgid "Новий пароль"
+msgstr "New password"
+
+#: .\main\forms.py:82 .\main\forms.py:113
+msgid "Підтвердіть пароль"
+msgstr "Confirm password"
+
+#: .\main\forms.py:91
+msgid "Введіть коректний email."
+msgstr "Enter a valid email."
+
+#: .\main\forms.py:92
+msgid "Ваша електронна скриня"
+msgstr "Your email"
+
+#: .\main\forms.py:99 .\main\forms.py:109 .\main\models.py:96
+msgid "Електронна скриня"
+msgstr "Email"
+
+#: .\main\forms.py:103 .\main\forms.py:112
+msgid "Пароль"
+msgstr "Password"
+
+#: .\main\forms.py:107
+msgid "Обов'язкове поле. Введіть коректні дані"
+msgstr "Mandatory field. Enter the correct data"
+
+#: .\main\forms.py:114 .\main\models.py:101
+msgid "Область"
+msgstr "Region"
+
+#: .\main\models.py:31
+msgid "Перший предмет"
+msgstr "The first subject"
+
+#: .\main\models.py:32
+msgid "Другий предмет"
+msgstr "The second subject"
+
+#: .\main\models.py:33
+msgid "Третій предмет"
+msgstr "The third subject"
+
+#: .\main\models.py:40 .\main\templates\main\applications.html:24
+msgid "Факультет"
+msgstr "Department"
+
+#: .\main\models.py:42
+msgid "Заявки"
+msgstr "Applications"
+
+#: .\main\models.py:97
+msgid "Обліковий запис с таким email вже існує."
+msgstr "An account with this email already exists."
+
+#: .\main\models.py:99 .\main\templates\main\spec.html:155
+msgid "ПІБ"
+msgstr "Full name"
+
+#: .\main\models.py:100
+msgid "Місто"
+msgstr "City"
+
+#: .\main\models.py:102
+msgid "Назва навчального закладу"
+msgstr "Name of the educational institution"
+
+#: .\main\models.py:103
+msgid "Скан оцінок"
+msgstr "Scan grades"
+
+#: .\main\models.py:105
+msgid "Дата регістрації"
+msgstr "Date of registration"
+
+#: .\main\models.py:106
+msgid "Останній вхід"
+msgstr "Last entry"
+
+#: .\main\models.py:136 .\main\templates\main\applications.html:21
+#: .\main\templates\main\spec.html:156
+msgid "Стан"
+msgstr "State"
+
+#: .\main\models.py:137
+msgid "Абітурієнт"
+msgstr "Entrant"
+
+#: .\main\models.py:138 .\main\templates\main\applications.html:23
+msgid "Спеціальність"
+msgstr "Specialty"
+
+#: .\main\templates\main\applications.html:12
+msgid "Ви ще не подали жодної заявки."
+msgstr "You have not submitted any application yet."
+
+#: .\main\templates\main\applications.html:22
+msgid "Пріорітет"
+msgstr "Priority"
+
+#: .\main\templates\main\applications.html:25
+#: .\main\templates\main\spec.html:162
+msgid "Рейтинговий бал"
+msgstr "Rating score"
+
+#: .\main\templates\main\applications.html:26
+msgid "Статус заявки"
+msgstr "Application status"
+
+#: .\main\templates\main\applications.html:39
+msgid "Перевірена"
+msgstr "Checked"
+
+#: .\main\templates\main\applications.html:41
+msgid "Проходить перевірку"
+msgstr "Passing inspection"
+
+#: .\main\templates\main\departments.html:19
+msgid "Директор/Декан:"
+msgstr "Director/Dean:"
+
+#: .\main\templates\main\departments.html:37
+msgid "Попередня"
+msgstr "Previous"
+
+#: .\main\templates\main\departments.html:41
+msgid "Наступна"
+msgstr "Next"
+
+#: .\main\templates\main\layout.html:27
+msgid "Факультети"
+msgstr "Departments"
+
+#: .\main\templates\main\layout.html:47
+msgid "Мої заявки"
+msgstr "My applications"
+
+#: .\main\templates\main\layout.html:48
+msgid "Мій скан атестату"
+msgstr "My rates photo"
+
+#: .\main\templates\main\layout.html:51
+msgid "Вийти"
+msgstr "Log out"
+
+#: .\main\templates\main\layout.html:53 .\main\templates\main\reg.html:18
+msgid "Зареєструватися"
+msgstr "Sigh up"
+
+#: .\main\templates\main\layout.html:54 .\main\templates\main\login.html:25
+msgid "Увійти"
+msgstr "Log in"
+
+#: .\main\templates\main\layout.html:67
+msgid ""
+"Сервіс Selection Committee - це сервіс, що був розроблений в ході виконання "
+"курсової роботи."
+msgstr ""
+"The Selection Committee service is a service that was developed during "
+"course work."
+
+#: .\main\templates\main\layout.html:68
+msgid ""
+"Цей сервіс імітує роботу приймальної комісії закладів навчання в Україні."
+msgstr ""
+"This service simulates the work of the admissions committee of educational "
+"institutions in Ukraine."
+
+#: .\main\templates\main\login.html:9
+msgid "Вхід до особистого профілю"
+msgstr "Login to personal profile"
+
+#: .\main\templates\main\login.html:16
+msgid "Неправильний email або пароль."
+msgstr "Incorrect email or password."
+
+#: .\main\templates\main\login.html:19
+msgid "Будь ласка, підтвердіть ваш email."
+msgstr "Please confirm your email."
+
+#: .\main\templates\main\login.html:22
+msgid "Ваш обліковий запис було заблоковано."
+msgstr "Your account has been locked."
+
+#: .\main\templates\main\login.html:24
+msgid "Проблеми з входом?"
+msgstr "Problems logging in?"
+
+#: .\main\templates\main\password-change-done.html:11
+#: .\main\templates\main\password-reset-done.html:11
+#: .\main\templates\main\reg.html:25 .\main\templates\main\spec.html:133
+msgid "Чудово!"
+msgstr "Excellent!"
+
+#: .\main\templates\main\password-change-done.html:12
+msgid "Ваш пароль був успішно змінений."
+msgstr "Your password has been successfully changed."
+
+#: .\main\templates\main\password-reset-confirm.html:13
+msgid "Зміна паролю"
+msgstr "Change password"
+
+#: .\main\templates\main\password-reset-confirm.html:20
+msgid "Змінити пароль"
+msgstr "Recover password"
+
+#: .\main\templates\main\password-reset-done.html:12
+msgid ""
+"На вашу електронну поштову адресу було відправлено повідомлення для зміни "
+"паролю."
+msgstr "A message to change your password has been sent to your email address."
+
+#: .\main\templates\main\password-reset.html:10
+msgid "Відновлення паролю"
+msgstr "Password recovery"
+
+#: .\main\templates\main\password-reset.html:20
+msgid "Облікового запису с таким email немає в системі."
+msgstr "There is no account with this email in the system."
+
+#: .\main\templates\main\password-reset.html:22
+msgid "Відновити пароль"
+msgstr "Recover password"
+
+#: .\main\templates\main\rates.html:9
+msgid "Скан атестату"
+msgstr "Scan of the certificate"
+
+#: .\main\templates\main\rates.html:22
+msgid "Видалити"
+msgstr "Remove"
+
+#: .\main\templates\main\rates.html:23
+msgid "Змінити"
+msgstr "Change"
+
+#: .\main\templates\main\reg.html:9
+msgid "Регістрація нового користувача"
+msgstr "New user registration"
+
+#: .\main\templates\main\reg.html:26
+msgid ""
+"На вашу електронну поштову адресу було відправлено повідомлення для "
+"підтвердження облікового запису"
+msgstr "An account verification message has been sent to your email address"
+
+#: .\main\templates\main\reset_url_used.html:12
+msgid "Це посилання для зміни паролю вже було використано."
+msgstr "This password reset link has already been used."
+
+#: .\main\templates\main\some_dep.html:11
+msgid "Заданий факультет відсутній у базі даних."
+msgstr "The given faculty is not in the database."
+
+#: .\main\templates\main\some_dep.html:18
+msgid "Директор/Декан"
+msgstr "Director/Dean"
+
+#: .\main\templates\main\some_dep.html:25
+msgid "Перелік спеціальностей:"
+msgstr "List of specialties:"
+
+#: .\main\templates\main\some_dep.html:29
+msgid "Код спеціальності"
+msgstr "Specialty code"
+
+#: .\main\templates\main\some_dep.html:30
+msgid "Назва спеціальності"
+msgstr "Name of specialty"
+
+#: .\main\templates\main\some_dep.html:31
+msgid "Кількість місць"
+msgstr "Number of seats"
+
+#: .\main\templates\main\some_dep.html:32
+msgid "Кількість бюджетних місць"
+msgstr "Number of budget seats"
+
+#: .\main\templates\main\spec.html:11
+msgid "Заданий факультет або спеціальність відсутні у базі даних."
+msgstr "The specified faculty or specialty is not in the database."
+
+#: .\main\templates\main\spec.html:16
+msgid "Про освітню програму"
+msgstr "About the educational program"
+
+#: .\main\templates\main\spec.html:17
+msgid "Код спеціальності:"
+msgstr "Specialty code:"
+
+#: .\main\templates\main\spec.html:18
+msgid "Назва спецальності:"
+msgstr "Name of specialty:"
+
+#: .\main\templates\main\spec.html:19
+msgid "Факультет/Інститут:"
+msgstr "Faculty/Institute:"
+
+#: .\main\templates\main\spec.html:20
+msgid "Ліцензійний обсяг прийому:"
+msgstr "Licensed volume of reception:"
+
+#: .\main\templates\main\spec.html:21
+msgid "Максимальне держзамовлення:"
+msgstr "Maximum state order:"
+
+#: .\main\templates\main\spec.html:23
+msgid "Складові конкурсного балу"
+msgstr "Components of a competitive ball"
+
+#: .\main\templates\main\spec.html:29 .\main\templates\main\spec.html:38
+#: .\main\templates\main\spec.html:47 .\main\templates\main\spec.html:55
+msgid "(бал min=100;"
+msgstr "(score min=100;"
+
+#: .\main\templates\main\spec.html:55
+msgid "4 Середній бал атестату"
+msgstr "4 The average score of the certificate"
+
+#: .\main\templates\main\spec.html:59
+msgid "Червоним позначені предмети на вибір абітурієнта."
+msgstr "Subjects of the applicant's choice are marked in red."
+
+#: .\main\templates\main\spec.html:69
+msgid "Для подачі заявки потрібно бути авторизованим у системі."
+msgstr "You need to be authorized in the system to submit an application."
+
+#: .\main\templates\main\spec.html:74
+msgid "Ви не можете подати більше 1 заявки на одну спеціальність."
+msgstr "You cannot submit more than 1 application for one specialty."
+
+#: .\main\templates\main\spec.html:79
+msgid "Ви не можете подати більше 5 заяв."
+msgstr "You cannot submit more than 5 applications."
+
+#: .\main\templates\main\spec.html:84
+msgid "Введіть результати ЗНО та середній бал атестату"
+msgstr ""
+"Enter the results of the external examination and the average score of the "
+"certificate"
+
+#: .\main\templates\main\spec.html:95 .\main\templates\main\spec.html:160
+msgid "Предмет на вибір"
+msgstr "Subject of choice"
+
+#: .\main\templates\main\spec.html:113 .\main\templates\main\spec.html:161
+msgid "Середній бал атестату"
+msgstr "The average score of the certificate"
+
+#: .\main\templates\main\spec.html:117
+msgid "Підтвердити"
+msgstr "Confirm"
+
+#: .\main\templates\main\spec.html:125
+msgid "Подати заявку"
+msgstr "Apply"
+
+#: .\main\templates\main\spec.html:127
+msgid "Рейтинговий список"
+msgstr "Ranking list"
+
+#: .\main\templates\main\spec.html:134
+msgid "Вашу заявку прийнято в обробку."
+msgstr "Your application has been accepted for processing."
+
+#: .\main\templates\main\spec.html:157
+msgid "П"
+msgstr "P"
+
+#: .\main\validators.py:45
+#, python-format
+msgid "Пароль дуже схожий на '%(verbose_name)s'."
+msgstr "Password too similar to '%(verbose_name)s'."
+
+#: .\main\validators.py:55
+msgid "Цей пароль занадто простий."
+msgstr "This password is too simple."
+
+#: .\main\validators.py:64
+msgid "Пароль не може складатися лише з цифр."
+msgstr "Password cannot consist only of numbers."
+
+#: .\selection_committee\settings.py:124
+msgid "Ukrainian"
+msgstr ""
+
+#: .\selection_committee\settings.py:125
+msgid "English"
+msgstr ""
+
+#: .\templates\admin\main\speciality\change_list.html:34
+msgid "Home"
+msgstr ""
+
+#: .\templates\admin\main\speciality\change_list.html:54
+msgid "Please correct the error below."
+msgstr ""
+
+#: .\templates\admin\main\speciality\change_list.html:54
+msgid "Please correct the errors below."
+msgstr ""
+
+#: .\templates\admin\main\speciality\change_list.html:79
+msgid "Filter"
+msgstr ""
+
+#: .\templates\admin\main\speciality\change_list.html:81
+msgid "Clear all filters"
+msgstr ""
+
+#: .\templates\admin\main\speciality\change_list.html:92
+msgid "Відомості не фіналізовані"
+msgstr "The information is not finalized"
+
+#: .\templates\admin\main\speciality\change_list.html:93
+msgid "Фіналізувати відомості"
+msgstr "Finalize information"
+
+#: .\templates\admin\main\speciality\change_list.html:95
+msgid "Відомості фіналізовані"
+msgstr "The information is finalized"
+
+#: .\templates\admin\main\speciality\change_list.html:96
+msgid "Відмінити фіналізацію відомостей"
+msgstr "Cancel the finalization of information"

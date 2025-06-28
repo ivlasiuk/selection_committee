@@ -1,0 +1,19 @@
+.image {
+    display: block;
+    margin: auto;
+    height: 100px;
+}
+
+.first-section {
+    height: 100vh;
+}
+
+.modal-body h3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.modal-body p {
+    margin-top: 20px;
+    text-align: center;
+}

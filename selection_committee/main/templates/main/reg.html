@@ -1,0 +1,41 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'main/css/reg.css'%}">
+{% endblock %}
+{% block first_section %}
+    <div class="col-4 offset-4">
+    <h3>{% trans 'Регістрація нового користувача' %}</h3>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in registration_form %}
+            <p><label for="{{ field.id_for_label }}">{{ field.label }} </label>{{ field }}</p>
+            {% for error in field.errors %}
+                <p class='error' style="color: red;">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        <button class="btn btn-primary submit btn-sub">{% trans 'Зареєструватися' %}</button>
+    </form>
+    <div class="modal fade" id="mymodal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class='image' src="data:image/png;base64,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" alt="None">
+                    <h3>{% trans 'Чудово!' %}</h3>
+                    <p>{% trans 'На вашу електронну поштову адресу було відправлено повідомлення для підтвердження облікового запису' %}</p>
+                    <div class="d-grid gap-1 col-3 mx-auto">
+                        <button class="close btn btn-primary right" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="{{ lolka }}"></div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="{% static 'main/js/reg.js' %}"></script>
+    </div>
+{% endblock %}
+{% block second-section %} {% endblock %}

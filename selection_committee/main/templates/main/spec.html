@@ -1,0 +1,192 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'main/css/spec.css' %}">
+{% endblock %}
+
+{% block first_section %}
+    {% if is_404 %}
+        <p>{% trans 'Заданий факультет або спеціальність відсутні у базі даних.' %}</p>
+    {% else %}
+        <div class="container">
+            <div class="col-8 offset-2">
+                <h3 class="text-center mt-1">{{ spec.title }}</h3>
+                <h4 class="mt-5">{% trans 'Про освітню програму' %}</h4>
+                <p class="mt-3"><strong>{% trans 'Код спеціальності:' %}</strong> {{ spec.code }}</p>
+                <p><strong>{% trans 'Назва спецальності:' %}</strong> {{ spec.title }}</p>
+                <p><strong>{% trans 'Факультет/Інститут:' %}</strong> {{ spec.department }}</p>
+                <p><strong>{% trans 'Ліцензійний обсяг прийому:' %}</strong> {{ spec.amount }}</p>
+                <p><strong>{% trans 'Максимальне держзамовлення:' %}</strong> {{ spec.budget_amount }}</p>
+                <div class="col-6 border-top border-3 border-warning bg-transparent">
+                    <h6 class="mt-4">{% trans 'Складові конкурсного балу' %}</h6>
+                </div>
+                <div class="row">
+                        <div class="col-3 mt-3">
+                            <ul class="list-group">
+                            {% for sub in spec.subject1.all %}
+                            <li class="list-group-item">1 {{ sub }}<p>{% trans '(бал min=100;' %} k={{ spec.coefficient1 }})</p></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-3 mt-3">
+                            <ul class="list-group">
+                            {% for sub in spec.subject2.all %}
+                            <li class="list-group-item">2 {{ sub }}<p>{% trans '(бал min=100;' %} k={{ spec.coefficient2 }})</p></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                </div>
+                        <div class="row">
+                        {% for sub in spec.subject3.all %}
+                        <div class="col-3 mt-3">
+                            <ul class="list-group sub3">
+                                <li class="list-group-item red">3 {{ sub }}<p>{% trans '(бал min=100;' %} k={{ spec.coefficient3 }})</p></li>
+                            </ul>
+                        </div>
+                        {% endfor %}
+                        </div>
+                        <div class="row">
+                        <div class="col-4 mt-3 center">
+                            <ul class="list-group">
+                                <li class="list-group-item">{% trans '4 Середній бал атестату' %}<p>{% trans '(бал min=100;' %} k={{ spec.coefficient4 }})</p></li>
+                            </ul>
+                        </div>
+                        </div>
+                    <p class="mt-3 fst-italic">{% trans 'Червоним позначені предмети на вибір абітурієнта.' %}</p>
+                    </div>
+            <div class="col-8 offset-2">
+            <div class="row justify-content-center">
+            <div class="modal fade" id="mymodal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="btn-close btn-sub" data-bs-dismiss="modal" aria-label="Close"></button>
+                            {% if not user.is_authenticated %}
+                            <h6 class="text-center">{% trans 'Для подачі заявки потрібно бути авторизованим у системі.' %}</h6>
+                            <div class="d-grid gap-1 col-3 mx-auto mt-4">
+                                <button class="close btn btn-primary right" data-bs-dismiss="modal">OK</button>
+                            </div>
+                            {% elif double %}
+                            <h6 class="text-center">{% trans 'Ви не можете подати більше 1 заявки на одну спеціальність.' %}</h6>
+                            <div class="d-grid gap-1 col-3 mx-auto mt-4">
+                                <button class="close btn btn-primary right" data-bs-dismiss="modal">OK</button>
+                            </div>
+                            {% elif limit %}
+                            <h6 class="text-center">{% trans 'Ви не можете подати більше 5 заяв.' %}</h6>
+                            <div class="d-grid gap-1 col-3 mx-auto mt-4">
+                                <button class="close btn btn-primary right" data-bs-dismiss="modal">OK</button>
+                            </div>
+                            {% else %}
+                            <h5>{% trans 'Введіть результати ЗНО та середній бал атестату' %}</h5>
+                            <form method="post" class="mt-4">
+                                {% csrf_token %}
+                                <p><label for="{{ field.id_for_label }}">{% for sub in spec.subject1.all %} {{ sub }} {% endfor %} </label>{{ form.firstRate }}</p>
+                                {% for error in form.firstRate.errors %}
+                                    <p class='error' style="color: red;">{{ error }}</p>
+                                {% endfor %}
+                                <p><label for="{{ field.id_for_label }}">{% for sub in spec.subject2.all %} {{ sub }} {% endfor %} </label>{{ form.secondRate }}</p>
+                                {% for error in form.secondRate.errors %}
+                                    <p class='error' style="color: red;">{{ error }}</p>
+                                {% endfor %}
+                                <label for="id_subject3">{% trans 'Предмет на вибір' %}</label>
+                                <div class="input-group">
+                                    <select name="subject" class="form-control" required id="id_subject">
+                                        <option selected>{% trans 'Оберіть...' %}</option>
+                                        {% for sub in spec.subject3.all %}
+                                            <option value="{{ sub.id }}">{{ sub }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="input-group-append">
+                                        {{ form.thirdRate }}
+                                    </div>
+                                </div>
+                                {% for error in form.thirdRate.errors %}
+                                    <p class='error' style="color: red;">{{ error }}</p>
+                                {% endfor %}
+                                {% for error in form.subject.errors %}
+                                    <p class='error' style="color: red;">{{ error }}</p>
+                                {% endfor %}
+                                <p class="mt-3"><label for="{{ field.id_for_label }}">{% trans 'Середній бал атестату' %}</label>{{ form.avgRate }}</p>
+                                {% for error in form.avgRate.errors %}
+                                    <p class='error' style="color: red;">{{ error }}</p>
+                                {% endfor %}
+                                <button class="btn btn-primary submit btn-sub">{% trans 'Підтвердити' %}</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {% if not isFinal %}
+            <button type="button" data-bs-toggle="modal" data-bs-target="#mymodal" class="btn btn-primary btn-block">{% trans 'Подати заявку' %}</button>
+                {% endif %}
+                <a class="btn btn-warning mt-4" id="a-scroll" data-bs-toggle="collapse" href="#id_collapse" role="button">{% trans 'Рейтинговий список' %} &#8595</a>
+                <div class="modal fade" id="mymodal1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img class='image' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAjVBMVEX///8AAAC+vr6Hh4eCgoK8vLz29vaBgYH5+fnAwMDz8/Pt7e3x8fFra2vU1NSfn5/l5eVcXFza2tqtra01NTVAQEDT09N7e3tlZWXn5+enp6eTk5PHx8dRUVEwMDBISEhwcHCPj48SEhImJiYLCwsfHx9CQkIgICAqKipLS0uamppYWFgXFxc5OTmzs7OU5GONAAAMZUlEQVR4nO1d51pyvRKlKG56U0Cam6IvonL/l3dUUNak7J2efM9x/VRIMmT6TJJK5Q9/+MMf/vCHP/zhD//vyBrtSW3cX9Sn+exttRrO8unm2D81R61G7KVZozNYLqbDdVWKj9m0Pxn8RwkdnfKnf3LaEIdVvTmIvV49jPorNdoA791xO/a61dA+5drU/W5mfdmKvf4SDMZvxuSdse/WOrGpkCIbv1qSd8Z21oxNihATc+YUYJOa5un0C0yCGVa3WWyqrhjc7F3T94V1PxG1Mxr6IO+MmwS0jiJ9u/uHVXd6V18cj5v6XT57fVg/q9EY2UiOZqWkDaf95ehR4Ji1BqPmYrralo1Qj0hjp0R9zo7LdqnP2XqsLUqszDEEMSIcCxa175609H1vXuTnbaMYyKZcjp4WE4MBG8vpvXTI15FzAkrQ7krJO1oY6159Jxt34W7xKphL12Hti0ymkqHXJoxhiPaLeA1DR+IyfhCPn7sZvhwn4fTb+qO7KXpiIVj33E0hRyY0Ee99x97HoC6kMYDhGAkt9NzDTK0b0Uwr30mdsXD/PE3WuRPMtvfLqSI9t/H4qw5E8uiDYS7oCHTozKF+EWEi8AKmviYTiOAhgI0S2F5PwtgUMKiXiVi0+QDm4INzeB3zEsxXrPHc417f8IFEmA08o8XH2UvHU2zYCd6DuBdX8CxUczo+Z3y7waspgw92DSeHo3Nm0JeNLwLvLo6djc25FgHjGARnN1ztIusDP0RLDU1YEm+dDMtqUe++bwFGbOrEhUZlWWPoYExztNksh73A3DIjevMJFZGxvrFt2qTHjBc4HyRAxhj/nZ3QtJmSi8fARR2M1Xi1GStjQheXNtYCjHnOLYZi4k93FtYSzC6ac1afDhStfMCDkUVThcrY19haFMFo1L2ZtulQAmeOF2mHjNrFldEglBPeHC/RFm3q3ZhIEPVlXhJqGzhjRFlMP98woAMk0jOAoGriXvv7tHskePVOBZTLdBXhgnw7GUNIQc2insmgPJqSnUBkJLGx1vruyvyrIUE3QicqoImt1FrMAHSh6tqiRb4XI+ukDGK01aMM4runZuopWiQbrppCpbbUc23JFjVc61bxS2Tnk4h5i0DKNmrO2xK/8uB5ffZoE45TSnQ+mamnaCCuTV3hC6RMeON9fQ5AUi0Km4if3ybocPOY6O0JkcLk1cwZJJ1U2teDrp5+RBIHxHkr20Syhekce+htVg838uWQ4liJZKEtTGcLL7GcNFVEUkrFXibZb9eVcmP8lvdy2SewRr0uTLigR/rkeqGmgOXLolwSKxQVFRspSiHujzQExCpuUYiB4VYqUkgq0FJJJOJVENCitU/EFtISuzyfgjZR3umDYdM2jQQp0+YiL36RQqfScCourH8wBBZ5kdgbLlMhpBaQRHKG7QIpsl+oQ2Tiih5sEqaC7cQqTlLgXkucUzSGbhpV7KBHIFm++KPZ4foJw4KcU7AsWpZmQhbsln4id71cfegSWKmAGtkLVdIGhovvkrIsquBh1csIAHP/LzqTsgSq6AU0iSJjhxFI7na5+tBn0S/AHh0E/8bTTLGdbjMCiTYVZKTQsYucgNI0E7/ABIWg5AkFgBen69UGu4PKthmDP95eYPgRt9rEEqghMlD2fOf+iRWOqIluUxb9Aqa/OccapdTherVhQyCxF9zWQ7UiZsXQUIv+AL7JWsQ2KJqIXbKWBFbg6gK2EQzD+0hnDSr8sQdtuwxNMgcmSYHt3NEOG5i4ahSoLxlVs7n+pzij6hG2LPqJRzkrgkcTq83SAYGkcYGx6uC0RspBWZmJX4DNp5nHzIr7XcDYVaMAs055EfP+gQ8WnmHhqhGAMv0g/0BjESOPaBDRi4FdCCSMB2PxHCF0Yu2g+fFQ3CpCCLisESoyLrToBRgikQACTlaYtb3bwCGBlRY0uBNWh0nEqUaPcCaD34DubVLGAYN/ZzWBPuxdNQIo0BCTD4Yy8NkfV2biB68SSsClCXs+zaUMfgNaFUmhFBLiQV0aN64aAvr3idv27HISdTjfQWJac/z7uztB0IAHAnFM4pjCYdhwRRm3ZuKCzXU8cuq8GoFCx2biArg9gPguuhSOu0/Do122wweLVuQU6nHpz7F/m+32RCCGTyQrCsF/uTQ0fjWvOWO5NxMXyDSNlrUARjAl0VFEL4DMWmhZ/KH10ly7agBIYxCLL/PIRWj8s12cNxatkBiCpNSgalHesUdPiuvvok8CMYYg1QnwV8uTicxNC7ok+tKiZ8iiJ5l8CrFklqjHqH4JxCiJFLpBPSrU1jbMInV20br4UowG6Ezy20Em6kP25YJlqpPox1W7Qlq4gFaTnUphxnShnlmUZhOJV4k9bUoZYbO4wDuBREeQjDA2RKll9U120auZOAPSorRKiJUZRX9aXxb9uWpXgEtDLyXDBmjVMr7ujnh01a4Aj3Iq/Y9ySlhPFgOwKDUWzE7B/OpHf3Vk0V3xpQh4KJiRNux0V797XJ1E/1r0G6hKGZuAdkSj6UvVQwlEIPpmz8xGoS+g07intnQvWTURIILgzlPA6Vit6pOK0fDtql0Bk+Ts/zAk0hq0XEcGMRPfwPooF8mjqtG7CqOMBUPJYIV2cnPaBBsXNS9NKt7FIHbwgmJGhH/qXsJaJGcBd5CkfQXFerwOQ3dkudEIJ4MVGiEJDAJ2EGsns2WyGMxMfAMvKBMYdbT5+q1tYmkLZya+UcaG8G+DnhoRiUFlkNqKXPQB7GU36NbnZTEwgeRabmFeG9uETTow2V1kX6XwXj5HJhVW/rA/0egSOtG7N1d474BAJpWkRPFHN+pmFz5fdIH/9gDUpJLSBLKpWe+XnMQAHR44nSRf2MHLu83OWMpIDEAgdpZKT6IjmxpeGiEmMUSPzlBl8ZgDML3wUqRuQhCIIXwBA+KnTFUDv4tBepDQ+Obyj6E6Mu6kNS/bWKCDN0QWGAKy1cY9+3QXw/TJ4fXxhQKG4mreLHwTnEBszCvOpJHyrvlR0pvQBGLoty/O9+ItLxbvrfzIfahGR9yYkivpyMW8FueBm189EbNQh1PIIw4lk2aok+yOy4Y75NdAKSzlPPJzxL8ARAkbPcbDT6t0LcQHsXEKyoNsYqLXzVOQUFtBd2TI1IYhRlCQC1qVDsCSe3mDnxHSxwHXq6b+ycMPySsbomZyte+Qu5LZY+2pgV6vrlq+Ji8jJH4dNGkFVT6zRX+XpPmU8Ch/Y4sUNMRLmE/pw3cabj59TSnui4dFIO6a3lUJ9P3mRK4y5UG7lfVOuNDvxrvtpBD0XTjNfaDPlIgv6YsN+uCT9isOlE8j3/4lBH32weDOGfqMYu58gbZoPJAFGhzubRB/L+g740ogbomZ/8w8sprYk0H0Zb+tWQzEvAScyCOkZzBPkZpmlJjDMbHviwTQZ+HMDXZGH9CLc3ONCAx35eYjMY8gpvKuzomuyuo9I/aIUxK7SB9bK8txa46Wgiyyb73bMtaGGS+6RmW0qIPfnFGose0i26XjIu5h3k+O6t1kb8xi3Nw1w75InzsZ1QQtdimubs9jx32JFEwxTwA7vA+pwZK4jxISs3rd5QuwHIkxEhusEnX8xC1H4jBwBm6wZlfgOpHLatTAedQ+N737u4BZu/j5IwbbxkfWSPgRkw03yyHQNs65mT21IXG6rFrtBqgvjh74eX1FAGyk8QXfVeKWoNtx7e8uZ16hVasfXll1vuVnnPmU/4zXN9Xqm7fAuHkvmM636y+Q+k/j6IXGpYi+ABWG3kE0b9e57DefRPMM7QJ6NWSc+/SNlcvwP5sL9y+Ys9gUzl5dzx3ZjkFdoF8+cQh3iXNLpHC+mdVeShq3Qvashn6zobmTLGNdt9E6jWW+lwy8Cp3KzORngO7rZiay1cz/SQeN0X82WkmX86nzxnrHpSujPhegAaaRsgpNgYsD6PZHKro9a08WfOyA8OdSlGP+Xri0avWhu1j2BhI3qzXo3dZnxT9TtfoSOQvNh6YC7D7e8vr8dFtrLj/RrN2ejnfd1f1z+Ter6wSy7KX7aIGPBOj7wqlISVhgmFDD2ZJP41hjmkgt7wePi/I1a2A9TrE7eTmT+SOa2N0ltn1XdGoyh1Udh+kk4WbIypfrNbXYyfUmcfIuGMxfy4nhsJ2dQoS3ztA7dT/Kqfoh7mlaS1b0ivA4Gt8MZWHWBffdze0o2ktvTpBlnclpfrybva53z9tPGd2/P+/uV916f347aoWSuv8BPhWN4IRYfzMAAAAASUVORK5CYII=" alt="None">
+                                <h3>{% trans 'Чудово!' %}</h3>
+                                <p>{% trans 'Вашу заявку прийнято в обробку.' %}</p>
+                                <div class="d-grid gap-1 col-3 mx-auto">
+                                    <button class="close btn btn-primary right" data-bs-dismiss="modal">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                {% if is_ok %}
+                <div id="lolka"></div>
+                {% endif %}
+                {% if error %}
+                <div id="error"></div>
+                {% endif %}
+                </div>
+                </div>
+                <div class="collapse mt-4" id="id_collapse">
+                    <table class="table table-stripped table-sortable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">№</th>
+                                <th scope="col">{% trans 'ПІБ' %}</th>
+                                <th scope="col">{% trans 'Стан' %}</th>
+                                <th scope="col">{% trans 'П' %}</th>
+                                <th scope="col">{% for sub in spec.subject1.all %} {{ sub }} {% endfor %}</th>
+                                <th scope="col">{% for sub in spec.subject2.all %} {{ sub }} {% endfor %}</th>
+                                <th scope="col">{% trans 'Предмет на вибір' %}</th>
+                                <th scope="col">{% trans 'Середній бал атестату' %}</th>
+                                <th scope="col">{% trans 'Рейтинговий бал' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bid in bids %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ bid.user.full_name }}</td>
+                                <td>{{ bid.state }}</td>
+                                <td>{{ bid.priority }}</td>
+                                <td>{{ bid.firstRate }}</td>
+                                <td>{{ bid.secondRate }}</td>
+                                <td>{{ bid.thirdRate }}</td>
+                                <td>{{ bid.avgRate }}</td>
+                                <td>{{ bid.summaryRate }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            <div id="table-scroll">
+
+            </div>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+            <script src="{% static 'main/js/popup_spec.js' %}"></script>
+    {% endif %}
+{% endblock %}
+
+{% block second-section %} {% endblock %}

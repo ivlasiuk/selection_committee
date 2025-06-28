@@ -1,0 +1,60 @@
+:root {
+    --color1: #FF5F6D;
+    --color2: #FFC371;
+}
+
+header {
+    background: var(--color1);
+    background: -webkit-linear-gradient(left, var(--color1) 0%, var(--color2) 100%);
+}
+
+.first-section {
+    background: linear-gradient(157deg, #ffffff 50%, #f7f7f7 50%);
+
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+.second-section {
+    background: linear-gradient(157deg, #323332 50%, #303030 50%);
+    padding: 20px 0px;
+    height: 100vh;
+    background-color: #323332;
+}
+
+.logo {
+    color: black;
+    font-size: 1.5em;
+}
+
+.link{
+    font-size: 1.7em;
+    color: black;
+}
+
+.restr {
+    display: flex;
+    float: right;
+    margin-left: 100px;
+}
+
+.second-section p {
+    color: #ffffff;
+}
+
+a:hover, .restr a:hover {
+    color: #ffffff;
+}
+
+
+a:focus {
+    outline:none;
+}
+
+.btn-sub {
+    float: right;
+}
+
+#user:focus {
+    color: #ffffff;
+}

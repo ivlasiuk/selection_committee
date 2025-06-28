@@ -1,0 +1,52 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'main/css/appls.css' %}">
+{% endblock %}
+
+{% block first_section %}
+    {% if is_empty %}
+        <div class="col-auto offset-auto text-center mt-5">
+            <h4>{% trans 'Ви ще не подали жодної заявки.' %}</h4>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="col-8 offset-2">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">{% trans 'Стан' %}</th>
+                            <th scope="col">{% trans 'Пріорітет' %}</th>
+                            <th scope="col">{% trans 'Спеціальність' %}</th>
+                            <th scope="col">{% trans 'Факультет' %}</th>
+                            <th scope="col">{% trans 'Рейтинговий бал' %}</th>
+                            <th scope="col">{% trans 'Статус заявки' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bid in bids %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ bid.state }}</td>
+                            <td>{{ bid.priority }}</td>
+                            <td>{{ bid.speciality }}</td>
+                            <td>{{ bid.speciality.department }}</td>
+                            <td>{{ bid.summaryRate }}</td>
+                            {% if bid.is_approved %}
+                            <td>{% trans 'Перевірена' %}</td>
+                            {% else %}
+                            <td>{% trans 'Проходить перевірку' %}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block second-section %} {% endblock %}

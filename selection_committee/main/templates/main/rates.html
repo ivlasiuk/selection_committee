@@ -1,0 +1,32 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block link %} <link rel="stylesheet" href="{% static 'main/css/rates.css' %}"> {% endblock %}
+
+{% block first_section %}
+    <div class="container text-center">
+        <h3 class="mb-3">{% trans 'Скан атестату' %}</h3>
+        <div class="row">
+            <div class="col-auto">
+                {% if img %}
+                <img src="{% static img %}" class="float-left d-block border border-4 border-warning" alt="">
+                {% else %}
+                <img src="{% static 'img/alt-tag.png' %}" class="float-left d-block border border-4 border-warning" alt="">
+                {% endif %}
+            </div>
+            <div class="col-3 mt-4">
+                    <form method="post" class="container-fluid" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="d-grid gap-3">
+                            <input type="submit" class="btn btn-danger btn-block" name="deleter" value="{% trans 'Видалити' %}">
+                            <input type="submit" class="btn btn-primary btn-block" name="changer" value="{% trans 'Змінити' %}">
+                            <input type="file" name="file" class="form-control">
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block second-section %} {% endblock %}

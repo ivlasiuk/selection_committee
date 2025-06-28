@@ -1,0 +1,12 @@
+.first-section {
+    height: 90vh;
+}
+a:hover {
+    color: black;
+}
+a {
+    text-decoration: none;
+}
+#inv_login {
+    color: red;
+}

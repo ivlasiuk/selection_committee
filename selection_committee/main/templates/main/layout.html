@@ -1,0 +1,77 @@
+<!doctype html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Лей-аут{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css"
+          integrity="sha384-zIaWifL2YFF1qaDiAo0JFgsmasocJ/rqu7LKYH8CoBEXqGbb9eO+Xi3s6fQhgFWM"
+          crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/29e0d11444.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'main/css/style.css'%}">
+    {% block link %}
+    {% endblock %}
+</head>
+<body>
+    <header class="container-fluid">
+        <nav class="navbar navbar-expand-fluid">
+            <div>
+            <a href="{% url 'home' %}" class="navbar-brand logo"><i class="fa-solid fa-building-columns"></i> Selection Committee</a>
+            <a href="{% url 'departments' %}" class="navbar-brand logo" id="departments"> {% trans 'Факультети' %}</a>
+            </div>
+            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language" class="form-select" onchange="this.form.submit()">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+            <span class="restr">
+                {% if user.is_authenticated %}
+                <div class="nav-item dropdown">
+                    <a href="" class="nav-link dropdown-toggle link" data-bs-toggle="dropdown" id="user" role="button">{{ user.full_name }}</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'appls' %}">{% trans 'Мої заявки' %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'scan' %}">{% trans 'Мій скан атестату' %}</a></li>
+                    </ul>
+                </div>
+                    <a href="{% url 'logout' %}" class="nav-link link">{% trans 'Вийти' %}  <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                {% else %}
+                    <a href="{% url 'registration' %}" class="nav-link link">{% trans 'Зареєструватися' %}</a>
+                    <a href="{% url 'login' %}" class="nav-link link">{% trans 'Увійти' %}</a>
+                {% endif %}
+            </span>
+        </nav>
+    </header>
+    <section class="container-fluid first-section pt-3 pb-3">
+            {% block first_section %}
+            <div class="col-5 offset-4">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            <p style="font-size:1.5em;">{% trans 'Сервіс Selection Committee - це сервіс, що був розроблений в ході виконання курсової роботи.' %}</p>
+            <p style="font-size:1.5em;">{% trans 'Цей сервіс імітує роботу приймальної комісії закладів навчання в Україні.' %}</p>
+
+            </div>
+    {% endblock %}
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+</body>
+</html>

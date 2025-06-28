@@ -1,0 +1,59 @@
+.first-section {
+    height: auto;
+    min-height: 90vh;
+}
+
+.red {
+    color: red;
+}
+
+.mark {
+    width: 250px;
+    margin-top: 10px;
+    background-color: red;
+}
+
+.about {
+    font-weight: bold;
+}
+
+#id_subject {
+    margin-right:10px;
+}
+
+.modal-body h3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.modal-body p {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.image {
+    display: block;
+    margin: auto;
+    height: 100px;
+}
+
+.table-sortable th {
+  cursor: pointer;
+}
+
+.trow {
+    cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+  content: "\25b4";
+}
+
+.table-sortable .th-sort-desc::after {
+  content: "\25be";
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+  margin-left: 5px;
+}

@@ -1,0 +1,21 @@
+.first-section {
+    height: 90vh;
+}
+
+.image {
+    display: block;
+    margin: auto;
+    margin-top: 170px;
+    height: 100px;
+}
+
+h3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+p {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+}

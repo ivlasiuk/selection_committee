@@ -1,0 +1,29 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'main/css/logstyle.css' %}">
+{% endblock %}
+{% block first_section %}
+    <div class="col-4 offset-4">
+    <h3>{% trans 'Вхід до особистого профілю' %}</h3>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in login_form %}
+            <p><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}</p>
+        {% endfor %}
+        {% if invalid_login %}
+        <p id="inv_login">{% trans 'Неправильний email або пароль.' %}</p>
+        {% endif %}
+        {% if verify %}
+        <p id="inv_login">{% trans 'Будь ласка, підтвердіть ваш email.' %}</p>
+        {% endif %}
+        {% if is_banned %}
+        <p id="inv_login">{% trans 'Ваш обліковий запис було заблоковано.' %}</p>
+        {% endif %}
+        <span><a href="{% url 'password-recovery' %}">{% trans 'Проблеми з входом?' %}</a><button
+                class="btn submit btn-sub btn-primary">{% trans 'Увійти' %}</button></span>
+    </form>
+    </div>
+{% endblock %}
+{% block second-section %} {% endblock %}

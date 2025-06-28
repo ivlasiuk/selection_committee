@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'main/css/pass-change.css' %}">
+{% endblock %}
+
+{% block first_section %}
+    <div class="col-4 offset-4">
+    <img src="https://flomaster.club/uploads/posts/2022-05/1653641934_2-flomaster-club-p-smailik-veselii-i-grustnii-raskraska-krasi-2.jpg" alt="Sad">
+    <p class="lolak">{% trans 'Це посилання для зміни паролю вже було використано.' %}</p>
+    </div>
+{% endblock %}
+{% block second-section %} {% endblock %}

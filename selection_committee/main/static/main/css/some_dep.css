@@ -1,0 +1,37 @@
+img {
+    height: 200px;
+}
+
+.dean {
+    margin-bottom: 0.2em;
+}
+
+.text-edit {
+    white-space: pre-wrap;
+}
+
+.first-section {
+    height: auto;
+    min-height: 90vh;
+}
+
+.table-sortable th {
+  cursor: pointer;
+}
+
+.trow {
+    cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+  content: "\25b4";
+}
+
+.table-sortable .th-sort-desc::after {
+  content: "\25be";
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+  margin-left: 5px;
+}

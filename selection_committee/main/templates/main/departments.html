@@ -1,0 +1,49 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'main/css/departments.css' %}">
+{% endblock %}
+
+{% block first_section %}
+    <div class="container mt-5">
+        <div class="row" data-masonry='{"percentPosition": true }'>
+            {% for dep in departments %}
+                <div class="col-4 mb-3 text-center">
+                    <div class="card border border-warning border-3">
+                        <a href="{% url 'some_dep' dep.url_slug %}">
+                            <div class="card-body">
+                                <h3>{{ dep.abbreviation }}</h3>
+                                <p>{{ dep.title }}</p>
+                                <p>{% trans 'Директор/Декан:' %} {{ dep.dean }}</p>
+                                <ul class="list-group">
+                                    {% for spec in spec %}
+                                        {% if spec.department == dep %}
+                                        <li class="list-group-item">{{ spec.code }} {{ spec.title }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if pages|length > 1 %}
+    <nav>
+        <ul class="pagination justify-content-center mt-3">
+            <li class="page-item {% if not has_prev %} disabled{% endif %}"><a class="page-link" href='?page={{ page|add:"-1" }}'>{% trans 'Попередня' %}</a></li>
+            {% for i in pages %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endfor %}
+            <li class="page-item {% if not has_next %} disabled{% endif %}"><a class="page-link" href='?page={{ page|add:"1" }}'>{% trans 'Наступна' %}</a></li>
+        </ul>
+    </nav>
+    {% endif %}
+    <script src="{% static 'main/js/deparment.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+{% endblock %}
+
+{% block second-section %} {% endblock %}
